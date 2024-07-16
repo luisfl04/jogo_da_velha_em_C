@@ -16,6 +16,43 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
 // * ATRIBUTOS GLOBAIS *:
 
 // * MÉTODOS DE VERIFICAÇÃO * :
+    char verificar_vencedor(){
+        /*Explicação do método -> É verificado todas as posiveis combinações do tabuleiro, e se houver algum ganhador, é retornado o valor.
+        Caso não houver um ganhador, é retornado um caractere vazio. 
+        */
+
+        // Verificando as linhas do tabuleiro:
+        for(int iterador = 0; iterador < 3; iterador++){
+            if( (tabuleiro_do_jogo[iterador][0] == tabuleiro_do_jogo[iterador][1]) && 
+            (tabuleiro_do_jogo[iterador][0] == tabuleiro_do_jogo[iterador][2]) ){
+                return tabuleiro_do_jogo[iterador][0];
+            }
+        }
+
+        // Verificando as combinações de colunas:
+        for(int iterador = 0; iterador < 3; iterador++){
+            if( (tabuleiro_do_jogo[0][iterador] == tabuleiro_do_jogo[1][iterador]) &&
+            (tabuleiro_do_jogo[0][iterador] == tabuleiro_do_jogo[2][iterador]) ){
+                return tabuleiro_do_jogo[0][iterador];
+            }
+        }
+
+        // Fazendo o teste de combinações de diagonais:
+        if( (tabuleiro_do_jogo[0][0] == tabuleiro_do_jogo[1][1]) && 
+        (tabuleiro_do_jogo[1][1] == tabuleiro_do_jogo[2][2]) ){
+            return tabuleiro_do_jogo[0][0];
+        }
+
+        if((tabuleiro_do_jogo[0][2] == tabuleiro_do_jogo[1][1]) && 
+        (tabuleiro_do_jogo[1][1] == tabuleiro_do_jogo[2][0]) ){
+            return tabuleiro_do_jogo[0][2];
+        }
+
+        // Retornando um valor vazio caso nenhuma verificação seja validada:
+        return ' '; 
+    }
+
+
 
 // * MÉTODOS GERAIS * :
 
@@ -50,30 +87,65 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
         printf("\n");
     }
 
+    void obter_jogada_do_usuario(){
+        /* Explicação do método -> É pedido para que o usuário digite as cordenadas da matriz onde ele quer posicionar um 'X'. É feita a verificação desse valor e caso
+        ele for válido, é posicionado o 'X' na matriz.
+        */
+
+        // Criando as variáveis que irão armazenar os valores das coordenadas:
+        int linha_da_jogada, coluna_da_jogada;
+
+
+        // Pedindo o valor da linha:
+        printf("\n\nOla usuario, digite a linha do tabuleiro onde voce deseja posicionar a sua jogada. Sao aceitos valores de 1 a 3.\nDigite o valor aqui -> ");
+        scanf("%d", &linha_da_jogada);
+
+        // Valor da coluna:
+        printf("\nCerto, agora digite o valor da coluna do tabuleiro onde voce deseja posicionar sua jogada. Tambem so sao aceitos valores entre 1 e 3\nDigite sua escolha aqui -> ");
+        scanf("%d", &coluna_da_jogada);
+
+        // Fazendo a verificação do valor:
+        if(tabuleiro_do_jogo[linha_da_jogada][coluna_da_jogada] != ' '){
+            // Informando valor inválido e chamando a função novamente:
+            printf("\nVoce digitou valores de coordenadas invalidos! Digite novamente. ");
+            obter_jogada_do_usuario();
+        }   
+        else{
+            // Se valor válido, escrevo na coordenada.
+            tabuleiro_do_jogo[linha_da_jogada][coluna_da_jogada] == 'X';
+        }
+    }
+
+
+
 
 
     int main(){
 
-        mostrar_tabuleiro_na_tela();
+        // Dando mensagem inicial do jogo ao executar o arquivo:
+        printf("Ola, seja bem vindo ao jogo_da_velha!\nVoce jogarah contra o computador.");
 
-        // // Dando mensagem inicial do jogo ao executar o arquivo:
-        // printf("Ola, seja bem vindo ao jogo_da_velha!\nVoce jogarah contra o computador.");
+        // Criando variável que armazenará o valor da jogada:
+        char jogada = ' '; // -> Inicialmente a jogada é iniciada com um valor vazio.
 
-        // // Criando variável que armazenará o valor da jogada:
-        // char jogada = ' '; // -> Inicialmente a jogada é iniciada com um valor vazio.
+        // Chamando função que inicializa o tabuleiro do jogo:
+        iniciar_jogo();
 
-        // // Chamando função que inicializa o tabuleiro do jogo:
-        // iniciar_jogo();
+        // Enquanto houver espaços vazios no tabuleiro, serão pedidos novos valores:
+        do{
 
-        // // Enquanto houver espaços vazios no tabuleiro, serão pedidos novos valores:
-        // do{
+            // A cada jogada, a matriz é mostrada na tela:
+            mostrar_tabuleiro_na_tela();
 
-        //     // A cada jogada, a matriz é mostrada na tela:
+            // O usuário é responsável pela primeira movimentação do jogo, essa função se encarrega disso:
+            obter_jogada_do_usuario();
+            
+            // Em toda jogada do usuaria, é verificado se há algum vencedor.
 
 
 
 
-        // }while(jogada == ' ');
+        }while(jogada == ' ');
 
 
 
