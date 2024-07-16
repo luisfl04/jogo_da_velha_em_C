@@ -116,6 +116,20 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
         }
     }
 
+    void obter_jogada_do_computador(){
+        /*Explicação do método -> Toda a matriz do tabuleiro é percorrida tentando encontrar um espaço vazio. Caso seja encontrado, é inserido um 'O' no local, caso não, é declarado que o jogo foi empate. */
+    
+        // loop´:
+        for(int verificador_linha = 0; verificador_linha < 3; verificador_linha++){
+            for(int verificador_coluna = 0; verificador_coluna < 3; verificador_coluna++){  
+                
+            }
+
+        }
+
+
+    
+    }   
 
 
 
@@ -141,6 +155,14 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
             obter_jogada_do_usuario();
             
             // Em toda jogada do usuaria, é verificado se há algum vencedor.
+            jogada = verificar_vencedor();
+
+            // Se houver vencedor, a execução do loop e finalizada:
+            if(jogada != ' '){
+                break;
+            }
+
+            // Caso não haja vencedor, é obtida a jogada oriúnda do 'computador':
 
 
 
