@@ -73,7 +73,7 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
 
         // Implementação:
         for(int linha_do_tabuleiro = 0; linha_do_tabuleiro < 3; linha_do_tabuleiro++){
-            printf(" %c  | %c  | %c ", tabuleiro_do_jogo[linha_do_tabuleiro][0], tabuleiro_do_jogo[linha_do_tabuleiro][1], 
+            printf(" %c | %c | %c ", tabuleiro_do_jogo[linha_do_tabuleiro][0], tabuleiro_do_jogo[linha_do_tabuleiro][1], 
             tabuleiro_do_jogo[linha_do_tabuleiro][2]);
 
             // Enquanto o loop não chega na última linha, printo esta estilização:
@@ -94,7 +94,6 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
         // Criando as variáveis que irão armazenar os valores das coordenadas:
         int linha_da_jogada, coluna_da_jogada;
 
-
         // Pedindo o valor da linha:
         printf("\n\nOla usuario, digite a linha do tabuleiro onde voce deseja posicionar a sua jogada. Sao aceitos valores de 1 a 3.\nDigite o valor aqui -> ");
         scanf("%d", &linha_da_jogada);
@@ -102,6 +101,9 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
         // Valor da coluna:
         printf("\nCerto, agora digite o valor da coluna do tabuleiro onde voce deseja posicionar sua jogada. Tambem so sao aceitos valores entre 1 e 3\nDigite sua escolha aqui -> ");
         scanf("%d", &coluna_da_jogada);
+
+        // Ao receber os valores, é decrementado o valor das coordenadas para que seja escrita a marcação no local correto:
+        linha_da_jogada--; coluna_da_jogada--;
 
         // Fazendo a verificação do valor:
         if(tabuleiro_do_jogo[linha_da_jogada][coluna_da_jogada] != ' '){
@@ -111,7 +113,7 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
         }   
         else{
             // Se valor válido, escrevo na coordenada.
-            tabuleiro_do_jogo[linha_da_jogada][coluna_da_jogada] == 'X';
+            tabuleiro_do_jogo[linha_da_jogada][coluna_da_jogada] = 'X';
         }
     }
 
@@ -144,7 +146,7 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
             exit(0);
         }
         else{
-            tabuleiro_do_jogo[verificador_linha][verificador_coluna] == 'O';
+            tabuleiro_do_jogo[verificador_linha][verificador_coluna] = 'O';
         }
 
     }   
@@ -152,7 +154,7 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
     int main(){
 
         // Dando mensagem inicial do jogo ao executar o arquivo:
-        printf("Ola, seja bem vindo ao jogo_da_velha!\nVoce jogarah contra o computador.");
+        printf("Ola, seja bem vindo ao jogo_da_velha!\nVoce jogarah contra o computador.\n");
 
         // Criando variável que armazenará o valor da jogada:
         char jogada = ' '; // -> Inicialmente a jogada é iniciada com um valor vazio.
@@ -178,15 +180,20 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
             }
 
             // Caso não haja vencedor, é obtida a jogada oriúnda do 'computador':
-            
+            obter_jogada_do_computador();
 
-
+            // Após a jogada do computador, é verificado novamente se há algum vencedor.
+            jogada = verificar_vencedor();
 
         }while(jogada == ' ');
-
-
-
-
+        
+        // Printando mensagem de vencedor conforme o resultado:
+        if(jogada == 'X'){
+            printf("\nParabens usuario!!! Voce ganhou a partida.");
+        }
+        else{
+            printf("\nO computador levou a melhor nessa.");
+        }
 
         return 0;
     }
