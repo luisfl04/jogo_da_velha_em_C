@@ -53,7 +53,6 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
     }
 
 
-
 // * MÉTODOS GERAIS * :
 
 // * MÉTODOS DE EXECUÇÃO * :    
@@ -117,22 +116,38 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
     }
 
     void obter_jogada_do_computador(){
-        /*Explicação do método -> Toda a matriz do tabuleiro é percorrida tentando encontrar um espaço vazio. Caso seja encontrado, é inserido um 'O' no local, caso não, é declarado que o jogo foi empate. */
-    
-        // loop´:
-        for(int verificador_linha = 0; verificador_linha < 3; verificador_linha++){
-            for(int verificador_coluna = 0; verificador_coluna < 3; verificador_coluna++){  
-                
-            }
+        /*Explicação do método -> Toda a matriz do tabuleiro é percorrida tentando encontrar um espaço vazio. Caso seja encontrado, é inserido um 'O' no local, caso não, 
+        é declarado que o jogo foi empate. */
 
+        /* Criando as variáveis que irão ser usadas para fazer as comparações das posições do tabuleiro. Elas estão sendo criadas aqui para que
+        seja possível acessá-las de qualquer lugar da função.
+        */
+        int verificador_linha, verificador_coluna;
+
+        // loop´:
+        for(verificador_linha = 0; verificador_linha < 3; verificador_linha++){
+            for(verificador_coluna = 0; verificador_coluna < 3; verificador_coluna++){  
+               // Se for encontrada um espaço vazio no tabuleiro, a execução do loop é encerrada.    
+               if(tabuleiro_do_jogo[verificador_linha][verificador_coluna] == ' '){
+                break;
+               } 
+            }
+            // Após for feita a comparação em uma linha, é feita a verificação novamente:
+            if(tabuleiro_do_jogo[verificador_linha][verificador_coluna] == ' '){
+                break;
+            }
         }
 
+        // Após a procura, é inserido o 'O' no espaço vazio encontrado ou é declarado que o jogo terminou empatado:
+        if((verificador_linha * verificador_coluna) == 9){
+            printf("\nO jogo terminou empatado!!!");
+            exit(0);
+        }
+        else{
+            tabuleiro_do_jogo[verificador_linha][verificador_coluna] == 'O';
+        }
 
-    
     }   
-
-
-
 
     int main(){
 
@@ -163,7 +178,7 @@ MÉTODOS GERAIS -> Implementações gerais que auxiliam na execução do arquivo
             }
 
             // Caso não haja vencedor, é obtida a jogada oriúnda do 'computador':
-
+            
 
 
 
